@@ -2,6 +2,13 @@
 
 > pycon-tweets-frontend
 
+## Pre-requires
+
+1. install npm  
+2. install node (node version >=4)
+
+## Develop
+
 ## Build Setup
 
 ``` bash
