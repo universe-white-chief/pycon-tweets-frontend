@@ -63,12 +63,11 @@ export default {
     myTweets: function() {
       this.tweets = [{"content":"今天天气不错", "created_at":"2018-10-02"}, {"content":"厉害了我的国", "created_at":"2018-10-01"}];
       
-      console.log('从后端获取结果数据...');
-      // fetch('http://0.0.0.0:5000/' + this.username + '/tweets')
-      // .then(response => response.json())
-      // .then(data => this.tweets = data)
-      // .catch(e => console.log("Oops, error", e));
-    },
+      fetch('http://0.0.0.0:5000/' + this.username + '/tweets')
+      .then(response => response.json())
+      .then(data => this.tweets = JSON.parse(data))
+      .catch(e => console.log("Oops, error", e));
+     },
     publish: function() {
       var _this = this;
       if(!this.content) {
@@ -77,16 +76,16 @@ export default {
       }
       console.log('向后端服务器发送数据...', this.content);
 
-      // var url = 'http://127.0.0.1:5000/'+this.username+'/tweet';
-      // fetch(url,
-      // {
-      //   headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      //   method: "POST",
-      //   body: "tweet_content=" + this.content,
-      //   mode: 'no-cors'
-      // })
-      // .then(function(res){ _this.myTweets(); })
-      // .catch(e => console.log("Oops, error", e));
+      var url = 'http://127.0.0.1:5000/'+this.username+'/tweet';
+      fetch(url,
+      {
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        method: "POST",
+        body: "tweet_content=" + this.content,
+        mode: 'no-cors'
+      })
+      .then(function(res){ _this.myTweets(); })
+      .catch(e => console.log("Oops, error", e));
     }
   }
 }
